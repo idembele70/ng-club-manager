@@ -1,7 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { SUPPORTED_LANGS, DEFAULT_LANG } from './core/config/i18n.config';
+import { DEFAULT_LANG, SUPPORTED_LANGS } from './core/config/i18n.config';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,7 @@ import { SUPPORTED_LANGS, DEFAULT_LANG } from './core/config/i18n.config';
   styleUrl: './app.css'
 })
 export class App implements OnInit {
-    private readonly translateService = inject(TranslateService);
+  private readonly translateService = inject(TranslateService);
 
   ngOnInit(): void {
     this.loadLang();
