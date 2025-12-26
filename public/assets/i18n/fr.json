@@ -35,7 +35,7 @@
       "FORM_FIELD": {
         "LABEL": "Mot de passe",
         "ERRORS": {
-          "REQUIRED": "un mot de passe est obligatoire",
+          "REQUIRED": "Un mot de passe est obligatoire",
           "MIN_LENGTH": "Le mot de passe doit contenir au moins 6 caractères",
           "MIS_MATCH": "Les mots de passe ne correspondent pas"
         }
@@ -90,7 +90,7 @@
       }
     },
     "ERRORS": {
-      "INVALID_CREDENTIALS": "Ces identifiants donnent l'accès à aucun club"
+      "INVALID_CREDENTIALS": "Ces identifiants ne donnent accès à aucun club"
     }
   },
   "RESTORE_SESSION": {

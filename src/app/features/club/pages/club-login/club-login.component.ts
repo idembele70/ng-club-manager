@@ -1,16 +1,14 @@
+import { LoaderService } from '@/core/services/loader.service';
 import { ZardButtonComponent } from '@/shared/components/button/button.component';
 import { ZardFormModule } from '@/shared/components/form/form.module';
 import { ZardInputDirective } from '@/shared/components/input/input.directive';
 import { Component, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { finalize, tap } from 'rxjs';
-import { LoaderService } from '@/core/services/loader.service';
 import { ClubLoginPayload } from '../../models/club.model';
 import { ClubAuthService } from '../../services/club-auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-club-login',

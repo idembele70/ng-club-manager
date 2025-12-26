@@ -13,14 +13,14 @@ export const clubRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.endsWith('me')) {
     const token = req.headers.get('token')?.split(' ')[1] ?? '';
 
-    const clubAuthSession = clubRepository.findByToken(token);
-    if (!clubAuthSession) {
+    const response = clubRepository.findByToken(token);
+    if (response === 'NOT_FOUND') {
       return HttpUtilities.notFoundError(req.url, 'RESTORE_SESSION.ERRORS.FAILED');
     }
-    if (+clubAuthSession.token < Date.now()) {
+    if (response === 'TOKEN_EXPIRED') {
       return HttpUtilities.unauthorizedError(req.url, 'RESTORE_SESSION.ERRORS.TOKEN_EXPIRED');
     }
-    return HttpUtilities.getReqSuccessResponse(req.url, clubAuthSession);
+    return HttpUtilities.getReqSuccessResponse(req.url, response);
   }
 
   if (req.url.endsWith('/auth/register')) {

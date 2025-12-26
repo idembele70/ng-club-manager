@@ -6,8 +6,8 @@ export const managerNameExistsValidator = (
   managerService: ManagerService
 ): AsyncValidatorFn => {
   let previousName: string | null = null;
-  return (control: AbstractControl): Observable<{ MANAGER_EXISTS:boolean } | null> => {
-    if(control.invalid) return of(null);
+  return (control: AbstractControl): Observable<{ MANAGER_EXISTS :boolean } | null> => {
+    if (control.invalid) return of(null);
     const name = control.value;
     return timer(100).pipe(
       switchMap(() => {

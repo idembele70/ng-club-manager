@@ -6,7 +6,7 @@ export class JwtUtilities {
     return crypto.AES.encrypt(
       JSON.stringify({
         ...payload,
-        exp: Date.now() + 3_600_000 * 24, // 1 days
+        exp: Date.now() + 3_600_000 * 24, // 1 day
       }),
       secret
     ).toString();

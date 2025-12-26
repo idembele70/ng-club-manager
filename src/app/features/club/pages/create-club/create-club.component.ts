@@ -1,24 +1,22 @@
+import { LoaderService } from '@/core/services/loader.service';
 import { ZardButtonComponent } from '@/shared/components/button/button.component';
 import { ZardFormModule } from '@/shared/components/form/form.module';
 import { ZardInputDirective } from '@/shared/components/input/input.directive';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
-import { CreateClubPayload } from '../../models/club.model';
-import { ClubRepositoryService } from '../../repositories/club.repository';
-import { clubNameValidator } from '../../validators/club-name.validator';
-import { managerNameValidator } from '../../validators/manager-name.validator';
-import { passwordMatchValidators } from '../../validators/password-match-validator';
-import { passwordValidator } from '../../validators/password.validator';
-import { ManagerRepositoryService } from '../../repositories/manager.repository';
-import { clubNameExistsValidator } from '../../validators/club-name-exists.validator';
-import { managerNameExistsValidator } from '../../validators/manager-name-exists.validator';
-import { finalize, tap } from 'rxjs';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { LoaderService } from '@/core/services/loader.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { finalize, tap } from 'rxjs';
+import { CreateClubPayload } from '../../models/club.model';
 import { ClubAuthService } from '../../services/club-auth.service';
 import { ClubService } from '../../services/club.service';
 import { ManagerService } from '../../services/manager.service';
+import { clubNameExistsValidator } from '../../validators/club-name-exists.validator';
+import { clubNameValidator } from '../../validators/club-name.validator';
+import { managerNameExistsValidator } from '../../validators/manager-name-exists.validator';
+import { managerNameValidator } from '../../validators/manager-name.validator';
+import { passwordMatchValidators } from '../../validators/password-match-validator';
+import { passwordValidator } from '../../validators/password.validator';
 
 @Component({
   selector: 'app-create-club',

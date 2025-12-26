@@ -13,7 +13,7 @@ export class JwtService {
     localStorage[this.JWT_KEY] = token;
   }
 
-  destroyToken(): void  {
+  destroyToken(): void {
     localStorage[this.JWT_KEY] = '';
   }
 }
