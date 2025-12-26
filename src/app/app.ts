@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { RouterOutlet } from "@angular/router";
+import { TranslateService } from '@ngx-translate/core';
 import { DEFAULT_LANG, SUPPORTED_LANGS } from './core/config/i18n.config';
 
 @Component({
   selector: 'app-root',
   imports: [
-    TranslatePipe,
-  ],
+    RouterOutlet,
+],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
