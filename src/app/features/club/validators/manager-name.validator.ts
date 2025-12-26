@@ -1,0 +1,10 @@
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+
+export const managerNameValidator: ValidatorFn = (control: AbstractControl<string>): ValidationErrors | null => {
+  const { value } = control;
+  if (!value) return { REQUIRED: true };
+  if (!/^.{3,30}$/.test(value)) return { LENGTH: true };
+  if (!/^[A-Za-z '-]+$/.test(value)) return { CHARS: true };
+  if (!/^[A-Za-z].*[A-Za-z]$/.test(value)) return { EDGES: true };
+  return null;
+}
