@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "unit-test": "ng test",
-    "e2e-test-fr": "npx playwright test --project=local-fr"
+    "e2e-test-fr": "npx playwright test --project=local-fr",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist/browser"
   },
   "prettier": {
     "printWidth": 100,
@@ -50,6 +52,7 @@
     "@tailwindcss/postcss": "^4.1.12",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^25.0.3",
+    "gh-pages": "^6.3.0",
     "jsdom": "^27.1.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.12",
