@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 
 import { provideZard } from '@/shared/core/provider/providezard';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { managerRepositoryInterceptor } from './features/club/interceptors/manag
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
     provideHttpClient(
       withInterceptors([
         tokenInterceptor,
