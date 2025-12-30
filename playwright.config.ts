@@ -37,7 +37,7 @@ export default defineConfig({
       name: 'local-fr',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:4200',
+        baseURL: 'http://localhost:4200/ng-club-manager',
         locale: 'fr-FR',
         timezoneId: 'Europe/Paris'
       }
@@ -47,7 +47,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command: 'npm run start',
-    url: 'http://localhost:4200',
+    url: 'http://localhost:4200/ng-club-manager',
     reuseExistingServer: !process.env.CI,
   },
 });

@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 
 import { provideZard } from '@/shared/core/provider/providezard';
@@ -9,6 +9,9 @@ import { errorInterceptor } from './core/interceptors/error.interceptor';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
 import { clubRepositoryInterceptor } from './features/club/interceptors/club-repository.interceptor';
 import { managerRepositoryInterceptor } from './features/club/interceptors/manager-repository.interceptor';
+import { JwtService } from './core/services/jwt.service';
+import { ClubAuthService } from './features/club/services/club-auth.service';
+import { EMPTY } from 'rxjs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,5 +27,8 @@ export const appConfig: ApplicationConfig = {
     ),
     ...i18nProviders,
     provideZard(),
+    provideAppInitializer(() => {
+      return inject(JwtService).getToken() ? inject(ClubAuthService).restoreSession() : EMPTY
+    })
   ],
 };

@@ -34,6 +34,7 @@ export class ClubRepositoryService {
       id: uuid.v4(),
       clubId,
       name: payload.managerName,
+      createdAt: Date.now()
     };
     this.managerRepository.create(newManager);
     const newClub: Club = {

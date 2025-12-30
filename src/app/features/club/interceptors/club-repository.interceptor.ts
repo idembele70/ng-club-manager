@@ -9,7 +9,6 @@ export const clubRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
   const clubRepository = inject(ClubRepositoryService);
-
   if (req.url.endsWith('me')) {
     const token = req.headers.get('token')?.split(' ')[1] ?? '';
 

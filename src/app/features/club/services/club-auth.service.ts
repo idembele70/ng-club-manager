@@ -16,10 +16,6 @@ export class ClubAuthService {
   readonly currentClubSession = this._currentClubAuthSession.asReadonly();
   readonly isLoggedIn = computed(() => this._currentClubAuthSession() !== undefined);
 
-  constructor() {
-    this.restoreSession();
-  }
-
   create(payload: CreateClubPayload): Observable<Club> {
     return this.http.post<Club>('/clubs/auth/register', payload);
   }
@@ -34,22 +30,24 @@ export class ClubAuthService {
       );
   }
 
-  private restoreSession(): void {
-    const token = this.jwtService.getToken();
-    if (!token) return;
-    this.http.get<ClubAuthSession>('/clubs/me')
-      .subscribe({
-        next: (clubAuthSession) => this.setAuth(clubAuthSession),
-        error: () => this.logout(),
-      });
+  restoreSession(): Observable<ClubAuthSession> {
+    return this.http.get<ClubAuthSession>('/clubs/me')
+      .pipe(
+        tap({
+          next: (clubAuthSession) => {
+            this.setAuth(clubAuthSession)
+          },
+          error: () => this.logout(),
+        })
+      );
   }
 
-  private setAuth(clubAuthSession: ClubAuthSession) {
+  setAuth(clubAuthSession: ClubAuthSession) {
     this._currentClubAuthSession.set(clubAuthSession);
     this.jwtService.saveToken(clubAuthSession.token);
   }
 
-  private logout() {
+  logout() {
     this.jwtService.destroyToken();
     this._currentClubAuthSession.set(undefined);
   }

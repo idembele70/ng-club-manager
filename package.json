@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "unit-test": "ng test",
-    "e2e-test-fr": "npx playwright test --project=local-fr",
+    "test:unit": "ng test",
+    "test:e2e:fr": "npx playwright test --project=local-fr",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist/browser"
   },
