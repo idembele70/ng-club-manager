@@ -40,7 +40,7 @@ describe('ManagerService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('exists', async () => {
+  describe('exists', () => {
     it('it should return true for given manager name', async () => {
       const exists = await firstValueFrom(service.exists('Mourinho'));
       expect(exists).toBe(true);

@@ -1,16 +1,15 @@
-import { Club, ClubAuthSession } from './../models/club.model';
-import { tokenInterceptor } from './../../../core/interceptors/token.interceptor';
+import { JwtService } from '@/core/services/jwt.service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { provideTranslateService } from '@ngx-translate/core';
 import { firstValueFrom } from 'rxjs';
-import { ClubLoginPayload, CreateClubPayload } from '../models/club.model';
-import { clubRepositoryInterceptor } from './../interceptors/club-repository.interceptor';
-import { ClubAuthService } from './club-auth.service';
-import { JwtService } from '@/core/services/jwt.service';
 import { Mock } from 'vitest';
-import { JwtUtilities } from '../utilities/jwt.utilities';
+import { ClubLoginPayload, CreateClubPayload } from '../models/club.model';
 import { ClubRepositoryService } from '../repositories/club.repository';
+import { tokenInterceptor } from './../../../core/interceptors/token.interceptor';
+import { clubRepositoryInterceptor } from './../interceptors/club-repository.interceptor';
+import { ClubAuthSession } from './../models/club.model';
+import { ClubAuthService } from './club-auth.service';
 
 describe('AuthService', () => {
   let service: ClubAuthService;
@@ -32,7 +31,7 @@ describe('AuthService', () => {
       passwordEncrypted: 'Encrypted-P@ssw0rd?!'
     },
     token: 'my-token'
-  }
+  };
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -45,7 +44,7 @@ describe('AuthService', () => {
     });
     service = TestBed.inject(ClubAuthService);
     jwtService = TestBed.inject(JwtService);
-    clubRepositoryService = TestBed.inject(ClubRepositoryService)
+    clubRepositoryService = TestBed.inject(ClubRepositoryService);
     saveTokenSpy = vi.spyOn(jwtService, 'saveToken');
   });
   it('should be created', () => {
@@ -64,7 +63,7 @@ describe('AuthService', () => {
   describe('login', () => {
     beforeEach(async () => {
       await firstValueFrom(service.create(CREATE_CLUB_MOCK_PAYLOAD));
-    })
+    });
 
     it('should login using club name', async () => {
       const payload: ClubLoginPayload = {
@@ -85,7 +84,7 @@ describe('AuthService', () => {
       };
       const authSession = await firstValueFrom(service.login(payload));
 
-      expect(service.currentClubSession).not.toBeUndefined();
+      expect(service.currentClubSession()).not.toBeUndefined();
       expect(saveTokenSpy).toHaveBeenCalledExactlyOnceWith(authSession.token);
     });
   });
@@ -93,9 +92,9 @@ describe('AuthService', () => {
   describe('restoreSession', () => {
     it('should restore session', async () => {
       vi.spyOn(clubRepositoryService, 'findByToken').mockReturnValue(MOCK_AUTH_SESSION);
-      vi.spyOn(jwtService, 'getToken').mockReturnValue('my-token')
+      vi.spyOn(jwtService, 'getToken').mockReturnValue('my-token');
       const setAuthSpy = vi.spyOn(service, 'setAuth');
-      const authSession = await firstValueFrom(service.restoreSession())
+      const authSession = await firstValueFrom(service.restoreSession());
       expect(setAuthSpy).toHaveBeenCalledExactlyOnceWith(authSession);
     });
   });
@@ -107,7 +106,7 @@ describe('AuthService', () => {
       service.setAuth(authSession);
       expect(service.currentClubSession()).toEqual(authSession);
       expect(saveTokenSpy).toHaveBeenCalledExactlyOnceWith(authSession.token);
-    })
+    });
   });
 
   describe('logout', () => {

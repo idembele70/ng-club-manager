@@ -29,7 +29,7 @@ describe('ClubService', () => {
               } else {
                 response = undefined;
               }
-              return of(response)
+              return of(response);
             }
           }
         }
@@ -46,10 +46,10 @@ describe('ClubService', () => {
     it('should return true when given club name exists', async () => {
       const exists = await firstValueFrom(service.exists('FC Porto'));
       expect(exists).toBe(true);
-    })
+    });
     it("should return false when given club name doesn't exists", async () => {
       const exists = await firstValueFrom(service.exists('FC Barcelona'));
       expect(exists).toBe(false);
-    })
-  })
+    });
+  });
 });

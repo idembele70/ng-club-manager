@@ -34,9 +34,7 @@ export class ClubAuthService {
     return this.http.get<ClubAuthSession>('/clubs/me')
       .pipe(
         tap({
-          next: (clubAuthSession) => {
-            this.setAuth(clubAuthSession)
-          },
+          next: (clubAuthSession) => this.setAuth(clubAuthSession),
           error: () => this.logout(),
         })
       );
