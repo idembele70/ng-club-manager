@@ -1,0 +1,77 @@
+name: Unit Tests
+
+on: 
+  push:
+    branches: [master]
+    paths: 
+      - 'src/**'
+      - 'e2e/**'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/jod
+
+      - name: Cache node modules
+        uses: actions/cache@v5
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Run Unit Tests
+        run: npm run test:unit:ci
+
+      - name: Upload tests results
+        uses: actions/upload-artifact@v6
+        with:
+          name: junit-results
+          path: test-results/junit-results.xml
+        
+      - name: Define test result title
+        run: |
+          echo "## Unit Tests Results" >> $GITHUB_STEP_SUMMARY
+
+      - name: Test results report
+        uses: dorny/test-reporter@v2
+        if: always()
+        with:
+          name: Unit Tests
+          path: test-results/junit-results.xml
+          reporter: java-junit
+          badge-title: 'tests_results'
+
+      - name: Generate code coverage summary
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: coverage/ng-club-manager/cobertura-coverage.xml
+          badge: true
+          fail_below_min: true
+          hide_complexity: true
+          indicators: true
+          format: markdown
+          output: both
+          thresholds: '60 80'
+
+      - name: Display coverage title in workflow summary
+        run: |
+          echo "## Code Coverage" >> $GITHUB_STEP_SUMMARY
+          cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+
+  run-e2e:
+    needs: unit-tests
+    if: ${{  needs.unit-tests.result == 'success' }}
+    uses: ./.github/workflows/e2e-tests.yml

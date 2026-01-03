@@ -4,7 +4,7 @@ import { ManagerRepositoryService } from '../repositories/manager.repository';
 import { HttpUtilities } from '../utilities/http.utilities';
 
 export const managerRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
-  if (!req.url.startsWith('/manager')) {
+  if (!req.url.startsWith('/managers')) {
     return next(req);
   }
   const managerRepository = inject(ManagerRepositoryService);

@@ -10,7 +10,7 @@ export class ManagerService {
   private readonly http = inject(HttpClient);
 
   exists(name: Manager['name']): Observable<boolean> {
-    return this.http.get('/manager/search', {
+    return this.http.get('/managers/search', {
       params: new HttpParams().set('name', name)
     }).pipe(
       map((manager) => !!manager),

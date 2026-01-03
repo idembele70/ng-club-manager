@@ -2,7 +2,7 @@ import crypto from 'crypto-js';
 import { Token } from '../models/club.model';
 
 export class JwtUtilities {
-  static sign<T extends Record<string, string>>(payload: T, secret: string): string {
+  static sign<T extends Record<string, string | number>>(payload: T, secret: string): string {
     return crypto.AES.encrypt(
       JSON.stringify({
         ...payload,
