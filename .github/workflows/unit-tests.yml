@@ -57,7 +57,7 @@ jobs:
       - name: Generate code coverage summary
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: coverage/todo/cobertura-coverage.xml
+          filename: coverage/ng-club-manager/cobertura-coverage.xml
           badge: true
           fail_below_min: true
           hide_complexity: true
