@@ -1,4 +1,12 @@
 {
+  "HEADER": {
+    "LOGO_NAME": "NG-Club-Manager"
+  },
+  "SIDEBAR": {
+    "LABEL": "Menu",
+    "DASHBOARD": "Dashboard",
+    "TRANSFERT_MARKET": "Marché des Transferts"
+  },
   "CREATE_CLUB_FORM": {
     "CLUB_NAME": {
       "LABEL": "Entrez le nom du club",
@@ -103,7 +111,49 @@
     "HTTP": {
       "404": {
         "MESSAGE": "Le lien n'existe pas ou plus"
+      },
+      "401": {
+        "MESSAGE": "Token invalide ou expirée"
       }
+    }
+  },
+  "PLAYER_CARD": {
+    "RATE":"note",
+    "AGE_LABEL": "ans",
+    "STATS": {
+      "LABEL": "stats clés",
+      "PACE": {
+        "ABBREVIATION": "VIT"
+      },
+      "PASSING": {
+        "ABBREVIATION": "PAS"
+      },
+      "PHYSICAL": {
+        "ABBREVIATION": "PHY"
+      },
+      "SHOOTING": {
+        "ABBREVIATION": "TIR"
+      },
+      "DEFENDING": {
+        "ABBREVIATION": "DEF"
+      }
+    },
+    "PRICE": {
+      "LABEL": "Valeurs"
+    }
+  },
+  "LOADING_STATE": {
+    "NOT_LOADED": "Non chargé",
+    "LOADING": "Chargement...",
+    "LOADED": "Chargé"
+  },
+  "MARKET": {
+    "EMPTY": "Aucun joueur disponible pour le moment",
+    "ERRORS": {
+      "CLUB": {
+        "NOT_FOUND": "Club introuvable"
+      },
+      "INSUFFICIENT_FUNDS": "Fonds insuffisants"
     }
   }
 }
