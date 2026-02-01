@@ -1,3 +1,4 @@
+import { MillionsPipe } from './../../../../shared/pipes/millions.pipe';
 import { ZardCardComponent } from '@/shared/components/card/card.component';
 import { Component, input } from '@angular/core';
 import { Player } from '../../models/player.model';
@@ -9,8 +10,12 @@ import { CurrencyPipe } from '@angular/common';
   imports: [
     ZardCardComponent,
     TranslatePipe,
-    CurrencyPipe
+    CurrencyPipe,
+    MillionsPipe
   ],
+  host: {
+    class: 'min-w-[250px]'
+  },
   template: `
      <ng-template #title>
     <div class="flex justify-between">
@@ -26,7 +31,7 @@ import { CurrencyPipe } from '@angular/common';
         class="w-[50px] mx-auto"
         [src]="player().avatarUrl"
         [alt]="player().fullName"
-        (error)="$event.target.src = fallbackAvatar" />
+        (error)="handleError($event)" />
     </ng-template>
    <z-card
     class="w-full max-w-[250px]"
@@ -35,7 +40,7 @@ import { CurrencyPipe } from '@angular/common';
     >
     <div class="mb-2">
       <p>{{player().fullName}}</p>
-      <p>{{player().age}} {{ 'PLAYER_CARD.AGE_LABEL' | translate }} • {{ player().clubAbbreviation }}</p>
+      <p>{{player().age}} {{ 'PLAYER_CARD.AGE_LABEL' | translate }} • {{ player().clubAbbreviation ?? '' }}</p>
     </div>
     <div class="mb-2">
       <h5 class="text-center font-bold">{{'PLAYER_CARD.STATS.LABEL' | translate}}</h5>
@@ -54,7 +59,7 @@ import { CurrencyPipe } from '@angular/common';
     </div>
     <div>
       <h5 class="text-center font-bold">{{'PLAYER_CARD.PRICE.LABEL' | translate}}</h5>
-      <span>💰 {{ player().price | currency}}</span>
+      <span>💰 {{ player().price | millions }}</span>
     </div>
     <div card-footer>
       <ng-content/>
@@ -66,5 +71,9 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class PlayerCardComponent {
   player = input.required<Player>();
-  fallbackAvatar = 'assets/img/player/player-default.png';
+  
+  handleError(event: Event): void {
+    const fallbackPlayerAvatar = 'assets/img/player/player-default.png';
+    (event.target as HTMLImageElement).src = fallbackPlayerAvatar;
+  }
 }

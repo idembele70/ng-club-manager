@@ -111,6 +111,9 @@
     "HTTP": {
       "404": {
         "MESSAGE": "Le lien n'existe pas ou plus"
+      },
+      "401": {
+        "MESSAGE": "Token invalide ou expirée"
       }
     }
   },
@@ -137,6 +140,20 @@
     },
     "PRICE": {
       "LABEL": "Valeurs"
+    }
+  },
+  "LOADING_STATE": {
+    "NOT_LOADED": "Non chargé",
+    "LOADING": "Chargement...",
+    "LOADED": "Chargé"
+  },
+  "MARKET": {
+    "EMPTY": "Aucun joueur disponible pour le moment",
+    "ERRORS": {
+      "CLUB": {
+        "NOT_FOUND": "Club introuvable"
+      },
+      "INSUFFICIENT_FUNDS": "Fonds insuffisants"
     }
   }
 }

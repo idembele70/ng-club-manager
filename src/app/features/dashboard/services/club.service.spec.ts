@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ClubService } from './club.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Club } from '../models/club.model';
+import { Club } from '../../../shared/models/club.model';
 import { firstValueFrom, Observable, of } from 'rxjs';
 
 describe('ClubService', () => {

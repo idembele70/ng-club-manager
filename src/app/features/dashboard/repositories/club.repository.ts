@@ -2,8 +2,8 @@ import { AuthSession } from '@/core/auth/auth.model';
 import { StorageService } from '@/core/services/storage.service';
 import { JwtUtilities } from '@/core/utilities/jwt.utilities';
 import { effect, inject, Injectable, signal } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
-import { Club } from '../models/club.model';
+import { environment } from 'src/environments/environment';
+import { Club } from '../../../shared/models/club.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +42,12 @@ export class ClubRepositoryService {
 
   create(newClub: Club): void{
     this._clubs.update(prev => [...prev, newClub])
+  }
+
+  update(club: Partial<Club>): void {
+    const updatedClubs = this._clubs().map(
+      c => c.id === club.id ?  {...c, ...club } : c
+    );
+    this._clubs.set(updatedClubs);
   }
 }

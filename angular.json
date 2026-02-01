@@ -9,7 +9,51 @@
   "projects": {
     "ng-club-manager": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "skipTests": true,
+          "export": true,
+          "changeDetection": "Default",
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "prefix": "app",
+          "flat": false,
+          "standalone": true,
+          "type": "component",
+          "addTypeToClassName": true
+        },
+        "@schematics/angular:directive": {
+          "export": true,
+          "prefix": "app",
+          "skipTests": true,
+          "type": "directive",
+          "standalone": true,
+          "addTypeToClassName": true,
+          "flat": true
+        },
+        "@schematics/angular:interface": {
+          "type": "model"
+        },
+        "@schematics/angular:interceptor": {
+          "flat": true,
+          "functional": true,
+          "skipTests": true,
+          "typeSeparator": "."
+        },
+        "@schematics/angular:pipe": {
+          "export": true,
+          "flat": true,
+          "skipTests": true,
+          "typeSeparator": ".",
+          "standalone": true,
+          "name": "pipe"
+        },
+        "@schematics/angular:service": {
+          "addTypeToClassName": true,
+          "flat": true,
+          "type": "service"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",

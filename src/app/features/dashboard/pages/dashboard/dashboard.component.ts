@@ -11,6 +11,8 @@ import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ZardTooltipDirective } from '@/shared/components/tooltip/tooltip';
+import { PlayerCardComponent } from "@/features/market/components/player-card/player-card.component";
+import { Player } from '@/features/market/models/player.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +27,7 @@ import { ZardTooltipDirective } from '@/shared/components/tooltip/tooltip';
     ZardButtonComponent,
     TranslatePipe,
     ZardTooltipDirective,
+    PlayerCardComponent
 ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
@@ -54,4 +57,5 @@ export class DashboardComponent {
       link: 'transfert/market'
     }
   ]
+
 }

@@ -1,0 +1,6 @@
+export enum LoadingState {
+  LOADING_INITIAL = 'LOADING_INITIAL',
+  LOADING_MORE = 'LOADING_MORE',
+  LOADED = 'LOADED',
+  ERROR = 'ERROR',
+}

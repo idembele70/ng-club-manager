@@ -1,10 +1,9 @@
 import { JwtService } from '@/core/services/jwt.service';
-import { Club } from '@/features/dashboard/models/club.model';
+import { Club } from '@/shared/models/club.model';
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { LoginPayload, RegisterPayload } from '../auth.model';
-import { AuthSession } from '../auth.model';
+import { LoginPayload, RegisterPayload, AuthSession } from '../auth.model';
 
 @Injectable({
   providedIn: 'root',

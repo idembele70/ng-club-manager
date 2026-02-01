@@ -12,7 +12,8 @@ import { managerRepositoryInterceptor } from './features/dashboard/interceptors/
 import { JwtService } from './core/services/jwt.service';
 import { AuthService } from './core/auth/services/auth.service';
 import { EMPTY } from 'rxjs';
-import { authRepositoryInterceptor } from './core/auth/auth.interceptor';
+import { authRepositoryInterceptor } from './core/auth/interceptors/auth.interceptor';
+import { marketRepositoryInterceptor } from './features/market/interceptors/market-repository.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,9 +23,11 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([
         tokenInterceptor,
         errorInterceptor,
+        // mock interceptors
         authRepositoryInterceptor,
         clubRepositoryInterceptor,
         managerRepositoryInterceptor,
+        marketRepositoryInterceptor,
       ]),
     ),
     ...i18nProviders,

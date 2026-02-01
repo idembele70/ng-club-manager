@@ -1,4 +1,4 @@
-import { Club } from "./club.model";
+import { Club } from "../../../shared/models/club.model";
 
 export interface Manager {
   id: string;

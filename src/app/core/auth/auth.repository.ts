@@ -1,13 +1,13 @@
-import { Club } from "@/features/dashboard/models/club.model";
+import { Club } from "@/shared/models/club.model";
 import { Manager } from "@/features/dashboard/models/manager.model";
 import { ClubRepositoryService } from "@/features/dashboard/repositories/club.repository";
 import { ManagerRepositoryService } from "@/features/dashboard/repositories/manager.repository";
 import { inject, Injectable } from "@angular/core";
 import crypto from 'crypto-js';
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 import * as uuid from 'uuid';
 import { JwtUtilities } from "../utilities/jwt.utilities";
-import { AuthSession, LoginPayload, RegisterPayload } from "./auth.model";
+import { AuthSession, LoginPayload, RegisterPayload, Token } from "./auth.model";
 
 
 @Injectable({
@@ -32,8 +32,9 @@ export class AuthRepositoryService {
       name: payload.clubName,
       managerId: newManager.id,
       passwordEncrypted: this.encryptPassword(payload.password),
-      balance: 100_000,
+      balance: 700_000_000,
       createdAt: Date.now(),
+      abbreviation: payload.clubName.slice(0,4),
     };
     this.clubRepository.create(newClub);
     return newClub;
@@ -62,7 +63,18 @@ export class AuthRepositoryService {
     return { club, token };
   }
 
-    private encryptPassword(password: RegisterPayload['password']): string {
+  isTokenValid(token?: string): boolean {
+    if (!token) return false;
+
+    const decode = JwtUtilities.decode(token, this.CRYPTO_SECRET_KEY);
+    return decode.exp > Date.now();
+  }
+
+  decodeToken(token: string): Token {
+    return JwtUtilities.decode(token, environment.CRYPTO_SECRET_KEY);
+  }
+
+  private encryptPassword(password: RegisterPayload['password']): string {
     const passwordEncrypted = crypto.AES.encrypt(password, this.CRYPTO_SECRET_KEY);
     return passwordEncrypted.toString();
   }

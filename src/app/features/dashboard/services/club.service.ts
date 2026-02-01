@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Club } from '../models/club.model';
+import { Club } from '../../../shared/models/club.model';
 import { map, Observable } from 'rxjs';
+import { AuthSession } from '@/core/auth/auth.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,5 +16,9 @@ export class ClubService {
     }).pipe(
       map((club) => !!club),
     );
+  }
+
+  get(): Observable<Club> {
+    return this.http.get<AuthSession>('/clubs/me').pipe(map(d => d.club));
   }
 }

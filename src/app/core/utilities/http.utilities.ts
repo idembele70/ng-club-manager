@@ -20,12 +20,21 @@ export class HttpUtilities {
     }));
   }
 
-  static notFoundError(url: string, i18nKey: Error['message']): Observable<never> {
+  static forbiddenError(url: string, i18nKey: Error['message']): Observable<never> {
+    return throwError(() => new HttpErrorResponse({
+      status: 403,
+      statusText: 'Forbidden',
+      url,
+      error: new Error(i18nKey),
+    }));
+  }
+
+  static notFoundError(url: string, i18nKey?: Error['message']): Observable<never> {
     return throwError(() => new HttpErrorResponse({
       status: 404,
       statusText: 'Not Found',
       url,
-      error: new Error(i18nKey),
+      error: new Error(i18nKey ?? 'ERRORS.HTTP.404.MESSAGE'),
     }));
   }
 

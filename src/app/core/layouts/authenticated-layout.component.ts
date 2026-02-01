@@ -5,12 +5,12 @@ import { ContentComponent } from "@/shared/components/layout/content.component";
 import { LayoutComponent } from "@/shared/components/layout/layout.component";
 import { SidebarComponent, SidebarGroupComponent, SidebarGroupLabelComponent } from "@/shared/components/layout/sidebar.component";
 import { ZardTooltipDirective } from "@/shared/components/tooltip/tooltip";
-import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { Component, inject, linkedSignal } from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { RouterOutlet } from "@angular/router";
+import { SIDEBAR } from "@/shared/constants/layout.constant";
+import { ResponsiveService } from "@/shared/services/responsive.service";
+import { Component, computed, inject, linkedSignal } from "@angular/core";
+import { RouterLink, RouterOutlet } from "@angular/router";
 import { TranslatePipe } from "@ngx-translate/core";
-import { map } from "rxjs";
+import { HORIZONTAL_PADDING_COMPENSATION } from './../../shared/constants/layout.constant';
 
 @Component({
   selector: 'app-authenticated-layout',
@@ -25,20 +25,21 @@ import { map } from "rxjs";
     ZardButtonComponent,
     TranslatePipe,
     ZardTooltipDirective,
+    RouterLink,
   ],
   template: `
   <z-layout
   class="overflow-hidden min-h-[100vh]">
-  <z-sidebar class="border-0"
-  [class.fixed]="isSmallScreen()"
+  <!-- [class.]="isSmallScreen()" -->
+  <z-sidebar class="fixed border-0"
   [class.inset-y-0]="isSmallScreen()"
-  [zWidth]="300"
+  [zWidth]="sidebarCurrentWidth()"
   [zCollapsed]="sidebarCollapsed()"
   [zCollapsible]="isSmallScreen()"
-  [zCollapsedWidth]="100"
+  [zCollapsedWidth]="sidebarCurrentWidth()"
   (zCollapsedChange)="sidebarCollapsed.set($event)"
   >
-  <nav [class]="'flex h-full flex-col overflow-hidden ' + (sidebarCollapsed() ? 'ga-1 p-1 pt-4' : 'gap-4 p-4') ">
+  <nav [class]="'flex h-full flex-col overflow-hidden ' + (sidebarCollapsed() ? 'gap-1 p-1 pt-4' : 'gap-4 p-4') ">
     <z-sidebar-group>
       @if (!sidebarCollapsed()) {
         <z-sidebar-group-label>
@@ -55,6 +56,7 @@ import { map } from "rxjs";
         [class]="sidebarCollapsed() ? 'justify-center' : 'justify-start'"
         [zTooltip]="sidebarCollapsed() ? label : ''"
         zPosition="right"
+        [routerLink]="item.link"
       >
         <z-icon
           [zType]="item.icon"
@@ -70,7 +72,7 @@ import { map } from "rxjs";
   <z-layout>
     <z-content
       class="min-h-[200px]"
-      [class.pl-[100px]]="isSmallScreen()"
+      [style.padding-left.px]="sidebarCurrentWidth() + horizontalPaddingCompensation"
       >
       <router-outlet />
     </z-content>
@@ -80,13 +82,16 @@ import { map } from "rxjs";
 })
 
 export default class AuthenticatedLayoutComponent {
-  protected readonly isSmallScreen = toSignal(inject(BreakpointObserver).observe([
-    Breakpoints.XSmall,
-    Breakpoints.Small
-  ]).pipe(
-    map(result => result.matches)
-  ), { initialValue: false });
+  private readonly responsiveService = inject(ResponsiveService);
+  protected readonly horizontalPaddingCompensation = HORIZONTAL_PADDING_COMPENSATION;
+
+  protected readonly isSmallScreen = this.responsiveService.isSmallScreen;
   protected readonly sidebarCollapsed = linkedSignal<boolean>(() => this.isSmallScreen());
+  protected readonly sidebarCurrentWidth = computed(() =>
+    this.isSmallScreen()
+      ? SIDEBAR.COLLAPSED_WIDTH
+      : SIDEBAR.WIDTH
+  );
 
   protected readonly menuItems: Array<{
     icon: ZardIcon,
@@ -101,7 +106,7 @@ export default class AuthenticatedLayoutComponent {
       {
         icon: 'credit-card',
         label: 'TRANSFERT_MARKET',
-        link: 'transfert/market'
+        link: 'market'
       }
     ]
 }

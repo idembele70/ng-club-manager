@@ -1,4 +1,4 @@
-import { Club } from "@/features/dashboard/models/club.model";
+import { Club } from "@/shared/models/club.model";
 
 export interface AuthSession {
   club: Club;

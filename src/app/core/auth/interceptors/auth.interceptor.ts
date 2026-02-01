@@ -1,8 +1,8 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { HttpUtilities } from '../utilities/http.utilities';
-import { LoginPayload, RegisterPayload } from './auth.model';
-import { AuthRepositoryService } from './auth.repository';
+import { HttpUtilities } from '../../utilities/http.utilities';
+import { LoginPayload, RegisterPayload } from '../auth.model';
+import { AuthRepositoryService } from '../auth.repository';
 
 export const authRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.startsWith('/auth')) {
@@ -30,5 +30,5 @@ export const authRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
     return HttpUtilities.getReqSuccessResponse(req.url, clubAuthSession);
   }
 
-  return HttpUtilities.notFoundError(req.url, 'ERRORS.HTTP.404.MESSAGE');
+  return HttpUtilities.notFoundError(req.url);
 };

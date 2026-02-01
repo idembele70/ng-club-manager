@@ -9,7 +9,7 @@ export const clubRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   }
   const clubRepository = inject(ClubRepositoryService);
   if (req.url.endsWith('me')) {
-    const token = req.headers.get('token')?.split(' ')[1] ?? '';
+    const token = req.headers.get('Authorization')?.split(' ')[1] ?? '';
 
     const response = clubRepository.findByToken(token);
     if (response === 'NOT_FOUND') {
@@ -26,5 +26,5 @@ export const clubRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
     const club = clubRepository.findByName(name!);
     return HttpUtilities.getReqSuccessResponse(req.url, club);
   }
-  return HttpUtilities.notFoundError(req.url, 'ERRORS.HTTP.404.MESSAGE');
+  return HttpUtilities.notFoundError(req.url);
 };

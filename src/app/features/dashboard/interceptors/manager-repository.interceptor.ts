@@ -14,5 +14,5 @@ export const managerRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
     const manager = managerRepository.findByName(name);
     return HttpUtilities.getReqSuccessResponse(req.url, manager);
   }
-  return HttpUtilities.notFoundError(req.url, 'ERRORS.HTTP.404.MESSAGE');
+  return HttpUtilities.notFoundError(req.url);
 };

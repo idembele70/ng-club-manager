@@ -1,4 +1,4 @@
-import { Manager } from "./manager.model";
+import { Manager } from "../../features/dashboard/models/manager.model";
 
 export interface Club {
   id: string;
@@ -7,4 +7,5 @@ export interface Club {
   passwordEncrypted: string;
   balance: number;
   createdAt: number;
+  abbreviation: string;
 }

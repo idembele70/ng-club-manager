@@ -6,18 +6,19 @@ export interface Player {
   avatarUrl: string;
   fullName: string;
   age: number;
-  clubAbbreviation: string;
+  clubId: string;
   stats: Stats;
   price: number;
+  clubAbbreviation?: string;
 }
 
-type PlayerRole = 
+export type PlayerRole = 
   | 'GK'
   | 'DEF'
   | 'MID'
   | 'ATT'
 
-interface Stats {
+export interface Stats {
   pace: number;
   shooting: number;
   passing: number;
