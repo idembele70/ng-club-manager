@@ -5,7 +5,7 @@
   "SIDEBAR": {
     "LABEL": "Menu",
     "DASHBOARD": "Dashboard",
-    "TRANSFERT_MARKET": "Marché des Transferts"
+    "TRANSFER_MARKET": "Marché des Transferts"
   },
   "CREATE_CLUB_FORM": {
     "CLUB_NAME": {
@@ -118,7 +118,7 @@
     }
   },
   "PLAYER_CARD": {
-    "RATE":"note",
+    "RATE": "note",
     "AGE_LABEL": "ans",
     "STATS": {
       "LABEL": "stats clés",
@@ -152,8 +152,41 @@
     "ERRORS": {
       "CLUB": {
         "NOT_FOUND": "Club introuvable"
+      }
+    },
+    "PURCHASE": {
+      "CONFIRM": {
+        "TITLE": "Veuillez Confirmer votre achat",
+        "CONTENT": "Souhaitez-vous acheter <b>{{fullName}}</b> pour <b>{{price}}</b>",
+        "BUTTON": {
+          "CANCEL": "Annulez",
+          "OK": "Achetez"
+        }
       },
-      "INSUFFICIENT_FUNDS": "Fonds insuffisants"
+      "FAILURE": {
+        "TITLE": "Achat échouer",
+        "INSUFFICIENT_FUNDS": "Fonds insuffisants"
+      },
+      "SUCCESS": {
+        "TITLE": "Achat Réussi",
+        "CONTENT": "<b>{{playerFullName}}</b> a rejoint le <b>{{clubName}}</b> pour la somme de <b>{{price}}</b>"
+      }
+    }
+  },
+  "CLUB": {
+    "DASHBOARD": {
+      "PLAYERS": {
+        "COUNT": {
+          "ZERO": "Aucun joueur dans le club",
+          "ONE": "Voici le seul joueur du club",
+          "OTHER": "Voici les {{ count }} joueurs du club"
+        }
+      },
+      "EMPTY": {
+        "CTA": {
+          "OPEN_MARKET": "Aller au marché des joueurs"
+        }
+      }
     }
   }
 }
