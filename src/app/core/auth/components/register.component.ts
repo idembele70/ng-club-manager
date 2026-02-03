@@ -86,6 +86,7 @@ import { passwordValidator } from '../validators/password.validator';
               <input
                 z-input
                 id="password"
+                type="password"
                 [placeholder]="'CREATE_CLUB_FORM.PASSWORD.FORM_CONTROL.PLACEHOLDER' | translate"
                 formControlName="password" />
             </z-form-control>
@@ -105,6 +106,7 @@ import { passwordValidator } from '../validators/password.validator';
               <input
                 z-input
                 id="confirmPassword"
+                type="password"
                 [placeholder]="'CREATE_CLUB_FORM.CONFIRM_PASSWORD.FORM_CONTROL.PLACEHOLDER' | translate"
                 formControlName="confirmPassword" />
               @let confirmPasswordControl = form.controls['confirmPassword'];

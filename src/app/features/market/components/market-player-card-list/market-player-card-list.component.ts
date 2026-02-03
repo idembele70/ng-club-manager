@@ -3,7 +3,7 @@ import { ZardButtonComponent } from '@/shared/components/zard/button/button.comp
 import { ZardDialogService } from '@/shared/components/zard/dialog';
 import { MillionsPipe } from '@/shared/pipes/millions.pipe';
 import { Component, computed, inject, input, output } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { switchMap, tap } from 'rxjs';
 import { PlayerCardComponent } from '@/shared/components/internal/player-card.component';
 import { Player } from '@libs/domain/models/player.model';
@@ -40,39 +40,47 @@ export class MarketPlayerCardListComponent {
   private readonly dialogService = inject(ZardDialogService);
   private readonly millionsPipe = inject(MillionsPipe);
   private readonly authService = inject(AuthService);
+  private readonly translateService = inject(TranslateService);
   protected readonly club = computed(() => this.authService.currentClubSession()!.club);
 
   bought = output();
 
   buyPlayer(player: Player): void {
+    const confirmTranslateKeyPrefix = 'MARKET.PURCHASE.CONFIRM.';
     this.dialogService.create({
-      zTitle: 'Veuillez Confirmer votre achat',
-      zContent: `Souhaitez-vous acheter <b>${player.fullName}</b> pour <b>${this.millionsPipe.transform(player.price)}</b>`,
-      zCancelText: 'Annulez',
-      zOkText: 'Achetez',
+      zTitle: this.translateService.instant(confirmTranslateKeyPrefix + 'TITLE'),
+      zContent: this.translateService.instant(confirmTranslateKeyPrefix + 'CONTENT', {
+        fullName: player.fullName,
+        price: this.millionsPipe.transform(player.price),
+      }),
+      zCancelText: this.translateService.instant(confirmTranslateKeyPrefix + 'BUTTON.CANCEL'),
+      zOkText: this.translateService.instant(confirmTranslateKeyPrefix + 'BUTTON.OK'),
       zOnOk: () => this.confirmTransaction(player),
     });
   }
   confirmTransaction(player: Player): void {
     this.marketService.buyPlayer(player.id).pipe(
       tap({
-      next: (result) => {
-        this.dialogService.create({
-          zTitle: 'Achat Réussi',
-          zContent: `<b>${result.playerFullName}</b> à rejoins le <b>${result.clubName}</b> pour la somme de <b>${this.millionsPipe.transform(result.price)}</b>`,
-          zHideFooter: true,
-        });
-        this.bought.emit();
-      },
-      error: () => {
-        this.dialogService.create({
-          zTitle: 'Achat échouer',
-          zContent: `Une erreur s'est produite lors de l'achat`,
-          zHideFooter: true,
-        });
-      }
-    }),
-    switchMap(() => this.authService.restoreSession()),
+        next: ({ playerFullName, clubName, price }) => {
+          const successTranslateKeyPrefix = 'MARKET.PURCHASE.SUCCESS.';
+          this.dialogService.create({
+            zTitle: this.translateService.instant(successTranslateKeyPrefix + 'TITLE'),
+            zContent: this.translateService.instant(successTranslateKeyPrefix + 'CONTENT', {
+              playerFullName, clubName, price: this.millionsPipe.transform(price)
+            }),
+            zHideFooter: true,
+          });
+          this.bought.emit();
+        },
+        error: (err) => {
+          this.dialogService.create({
+            zTitle: this.translateService.instant('MARKET.PURCHASE.FAILURE.TITLE'),
+            zContent: this.translateService.instant(err.message),
+            zHideFooter: true,
+          });
+        },
+      }),
+      switchMap(() => this.authService.restoreSession()),
     ).subscribe();
   }
 }

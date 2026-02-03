@@ -39,7 +39,7 @@ export const marketRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
     }
 
     if (club.balance < player.price) {
-      return HttpUtilities.forbiddenError(req.url, 'MARKET.ERRORS.INSUFFICIENT_FUNDS');
+      return HttpUtilities.forbiddenError(req.url, 'MARKET.PURCHASE.FAILURE.INSUFFICIENT_FUNDS');
     }
 
     playerRepository.update({...player, clubId: club.id });

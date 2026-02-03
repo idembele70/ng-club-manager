@@ -40,7 +40,7 @@ import { AuthService } from '../services/auth.service';
       <z-form-field>
         <label z-form-label zRequired for="password">{{ 'LOGIN_CLUB_FORM.PASSWORD.FORM_FIELD.LABEL' | translate }}</label>
         <z-form-control>
-          <input z-input id="password"
+          <input z-input id="password" type="password"
             [placeholder]="'LOGIN_CLUB_FORM.PASSWORD.FORM_FIELD.CONTROL.PLACEHOLDER' | translate"
             formControlName="password"/>
           </z-form-control>

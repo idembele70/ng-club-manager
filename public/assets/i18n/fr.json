@@ -152,8 +152,25 @@
     "ERRORS": {
       "CLUB": {
         "NOT_FOUND": "Club introuvable"
+      }
+    },
+    "PURCHASE": {
+      "CONFIRM": {
+        "TITLE": "Veuillez Confirmer votre achat",
+        "CONTENT": "Souhaitez-vous acheter <b>{{fullName}}</b> pour <b>{{price}}</b>",
+        "BUTTON": {
+          "CANCEL": "Annulez",
+          "OK": "Achetez"
+        }
       },
-      "INSUFFICIENT_FUNDS": "Fonds insuffisants"
+      "FAILURE": {
+        "TITLE": "Achat échouer",
+        "INSUFFICIENT_FUNDS": "Fonds insuffisants"
+      },
+      "SUCCESS": {
+        "TITLE": "Achat Réussi",
+        "CONTENT": "<b>{{playerFullName}}</b> a rejoint le <b>{{clubName}}</b> pour la somme de <b>{{price}}</b>"
+      }
     }
   },
   "CLUB": {

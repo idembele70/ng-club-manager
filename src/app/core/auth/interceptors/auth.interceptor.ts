@@ -6,7 +6,6 @@ import { RegisterPayload } from '@libs/domain/models/register-payload.model';
 import { AuthRepositoryService } from '../auth.repository';
 
 export const authRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log(req.url)
   if (!req.url.startsWith('/auth')) {
     return next(req);
   }
