@@ -77,7 +77,7 @@ export class MarketPage {
 
   async expectPurchaseSuccess(fullName: string, priceInMillions: string): Promise<void> {
     await this.purchaseSuccessDialogComponent.expectVisible();
-    await this.purchaseSuccessDialogComponent.expectContentText(new RegExp(`${fullName} à rejoins le (.*) pour la somme de ${priceInMillions}`));
+    await this.purchaseSuccessDialogComponent.expectContentText(new RegExp(`${fullName} a rejoint le (.*) pour la somme de ${priceInMillions}`));
   }
 
   private extractNumberFromText(text: string): number {
