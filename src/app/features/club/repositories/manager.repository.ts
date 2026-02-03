@@ -1,6 +1,6 @@
 import { StorageService } from '@/core/services/storage.service';
 import { effect, inject, Injectable, signal } from '@angular/core';
-import { Manager } from '../models/manager.model';
+import { Manager } from '@/features/club/models/manager.model';
 
 @Injectable({
   providedIn: 'root',

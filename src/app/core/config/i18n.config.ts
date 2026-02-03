@@ -4,7 +4,7 @@ import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
 export const SUPPORTED_LANGS = ['en', 'fr'] as const;
 export type SupportedLangs = typeof SUPPORTED_LANGS[number];
 export const DEFAULT_LANG: SupportedLangs = 'fr';
-export const FALLBACK_LANG: SupportedLangs = 'en';
+export const FALLBACK_LANG: SupportedLangs = 'fr';
 
 export const i18nProviders = [
   provideTranslateService({

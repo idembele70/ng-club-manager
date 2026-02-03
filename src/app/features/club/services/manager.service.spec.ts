@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ManagerService } from './manager.service';
+import { ManagerService } from '@/features/club/services/manager.service';
 import { firstValueFrom, Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Manager } from '../models/manager.model';
+import { Manager } from '@/features/club/models/manager.model';
 
 describe('ManagerService', () => {
   let service: ManagerService;

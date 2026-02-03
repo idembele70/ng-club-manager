@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Manager } from '../models/manager.model';
+import { Manager } from '@/features/club/models/manager.model';
 import { map, Observable } from 'rxjs';
 
 @Injectable({

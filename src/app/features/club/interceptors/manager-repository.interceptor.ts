@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { ManagerRepositoryService } from '../repositories/manager.repository';
-import { HttpUtilities } from '../utilities/http.utilities';
+import { HttpUtilities } from '@/core/utilities/http.utilities';
 
 export const managerRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.startsWith('/managers')) {
@@ -14,5 +14,5 @@ export const managerRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
     const manager = managerRepository.findByName(name);
     return HttpUtilities.getReqSuccessResponse(req.url, manager);
   }
-  return HttpUtilities.notFoundError(req.url, 'ERRORS.HTTP.404.MESSAGE');
+  return HttpUtilities.notFoundError(req.url);
 };
