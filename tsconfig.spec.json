@@ -10,9 +10,6 @@
   },
   "include": [
     "src/**/*.d.ts",
-    "src/**/*.spec.ts"
-  ],
-  "references": [
-    { "path": "./libs" },
+    "src/**/*.spec.ts",
   ]
 }
