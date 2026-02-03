@@ -17,7 +17,7 @@
           "inlineTemplate": true,
           "inlineStyle": true,
           "prefix": "app",
-          "flat": false,
+          "flat": true,
           "standalone": true,
           "type": "component",
           "addTypeToClassName": true

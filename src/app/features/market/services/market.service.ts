@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BuyPlayerResponse } from '../models/buy-player-response.model';
 import { MarketFilter } from '../models/market-filter.model';
-import { Player } from '../models/player.model';
+import { Player } from '@libs/domain/models/player.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,6 @@ export class MarketService {
   }
 
   buyPlayer(playerId: Player['id']): Observable<BuyPlayerResponse> {
-    return this.http.post<BuyPlayerResponse>(`/markets/players/${playerId}/buy`, {});
+    return this.http.post<BuyPlayerResponse>(`/markets/players/${playerId}/buy`, null);
   }
 }

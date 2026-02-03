@@ -1,6 +1,6 @@
 import { AbstractControl, AsyncValidatorFn } from "@angular/forms";
 import { map, Observable, of, switchMap, tap, timer } from "rxjs";
-import { ManagerService } from "@/features/dashboard/services/manager.service";
+import { ManagerService } from "@/features/club/services/manager.service";
 
 export const managerNameExistsValidator = (
   managerService: ManagerService

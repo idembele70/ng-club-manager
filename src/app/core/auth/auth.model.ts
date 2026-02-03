@@ -1,19 +1,8 @@
-import { Club } from "@/shared/models/club.model";
+import { Club } from "@/features/club/models/club.model";
 
 export interface AuthSession {
   club: Club;
   token: string;
-}
-
-export interface RegisterPayload {
-  clubName: string;
-  managerName: string;
-  password: string;
-}
-
-export interface LoginPayload {
-  managerOrClubName: string;
-  password: string;
 }
 
 export interface Token {

@@ -1,14 +1,11 @@
-import { JwtUtilities } from './../../../core/utilities/jwt.utilities';
-import { ClubRepositoryService } from '@/features/dashboard/repositories/club.repository';
 import { StorageService } from "@/core/services/storage.service";
-import { computed, effect, inject, Injectable, signal } from "@angular/core";
-import { Player } from "../models/player.model";
-import { createPlayer } from "../factories/player.factory";
-import { MarketFilter } from "../models/market-filter.model";
+import { ClubRepositoryService } from '@/features/club/repositories/club.repository';
+import { PlayerRepository } from '@/shared/repositories/player.repository';
 import { HttpParams } from "@angular/common/http";
+import { effect, inject, Injectable, signal } from "@angular/core";
 import { BuyPlayerResponse } from "../models/buy-player-response.model";
-import { PlayerRepository } from './player.repository';
 import { MarketTransaction } from '../models/market-transaction.model';
+import { Player } from "@libs/domain/models/player.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +13,9 @@ import { MarketTransaction } from '../models/market-transaction.model';
 export class MarketRepository {
   private readonly _STORAGE_KEY = 'NG_CLUB_MANAGER_MARKET_TRANSACTION_LIST';;
   private readonly _storageService = inject<StorageService<MarketTransaction[]>>(StorageService);
-
   private readonly playerRepository = inject(PlayerRepository);
-  private readonly _marketList = computed<Player[]>(() =>
-    this.playerRepository.playerList().filter(p => !p.clubId)
-  );
+
+  private readonly _marketList = this.playerRepository.marketPlayerList;
   private readonly _marketTransactions = signal<MarketTransaction[]>([])
   private readonly clubRepository = inject(ClubRepositoryService);
 

@@ -1,13 +1,13 @@
 import { LoaderService } from '@/core/services/loader.service';
-import { ZardButtonComponent } from '@/shared/components/button/button.component';
-import { ZardFormModule } from '@/shared/components/form/form.module';
-import { ZardInputDirective } from '@/shared/components/input/input.directive';
+import { ZardButtonComponent } from '@/shared/components/zard/button/button.component';
+import { ZardFormModule } from '@/shared/components/zard/form/form.module';
+import { ZardInputDirective } from '@/shared/components/zard/input/input.directive';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { finalize, tap } from 'rxjs';
-import { LoginPayload } from '../auth.model';
+import { LoginPayload } from '@libs/domain/models/login-payload.model';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -38,9 +38,7 @@ import { AuthService } from '../services/auth.service';
         </z-form-control>
       </z-form-field>
       <z-form-field>
-        <label z-form-label zRequired for="password">
-          {{ 'LOGIN_CLUB_FORM.PASSWORD.FORM_FIELD.LABEL' | translate }}
-        </label>
+        <label z-form-label zRequired for="password">{{ 'LOGIN_CLUB_FORM.PASSWORD.FORM_FIELD.LABEL' | translate }}</label>
         <z-form-control>
           <input z-input id="password"
             [placeholder]="'LOGIN_CLUB_FORM.PASSWORD.FORM_FIELD.CONTROL.PLACEHOLDER' | translate"
@@ -55,15 +53,11 @@ import { AuthService } from '../services/auth.service';
           z-type="default" type="submit"
           [zDisabled]="isSubmitBtnDisabled"
           [zLoading]="loaderService.isAuthenticating()"
-          >
-          {{ 'LOGIN_CLUB_FORM.BUTTON.LOGIN.LABEL' | translate }}
-          </button>
+          >{{ 'LOGIN_CLUB_FORM.BUTTON.LOGIN.LABEL' | translate }}</button>
           <button z-button z-type="default"
             type="button"
             [routerLink]="['../', 'register']"
-            [zDisabled]="form.disabled">
-            {{ 'LOGIN_CLUB_FORM.BUTTON.REGISTER.LABEL' | translate }}
-          </button>
+            [zDisabled]="form.disabled">{{ 'LOGIN_CLUB_FORM.BUTTON.REGISTER.LABEL' | translate }}</button>
         </div>
     </form>
   `,

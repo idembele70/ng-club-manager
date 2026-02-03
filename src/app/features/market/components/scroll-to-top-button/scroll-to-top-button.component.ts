@@ -1,5 +1,5 @@
-import { ZardButtonComponent } from '@/shared/components/button/button.component';
-import { ZardIconComponent } from '@/shared/components/icon/icon.component';
+import { ZardButtonComponent } from '@/shared/components/zard/button/button.component';
+import { ZardIconComponent } from '@/shared/components/zard/icon/icon.component';
 import { ResponsiveService } from '@/shared/services/responsive.service';
 import { Component, DOCUMENT, inject, NgZone, OnDestroy, OnInit, Renderer2, signal } from '@angular/core';
 

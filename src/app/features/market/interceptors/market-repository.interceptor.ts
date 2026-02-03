@@ -1,10 +1,10 @@
 import { AuthRepositoryService } from '@/core/auth/auth.repository';
 import { HttpUtilities } from '@/core/utilities/http.utilities';
-import { ClubRepositoryService } from '@/features/dashboard/repositories/club.repository';
+import { ClubRepositoryService } from '@/features/club/repositories/club.repository';
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { MarketRepository } from '../repositories/market.repository';
-import { PlayerRepository } from '../repositories/player.repository';
+import { PlayerRepository } from '@/shared/repositories/player.repository';
 
 export const marketRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.startsWith('/markets')) {
@@ -26,9 +26,9 @@ export const marketRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   if (/players\/[a-zA-Z0-9-]+\/buy$/.test(req.url)) {
     const decode = authRepository.decodeToken(token ?? '');
     const playerId = req.url.split('/').at(3);
-
+    
     const club = clubRepository.findById(decode.clubId);
-
+    
     if (!club) {
       return HttpUtilities.notFoundError(req.url, 'MARKET.ERRORS.CLUB.NOT_FOUND');
     }

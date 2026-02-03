@@ -1,6 +1,6 @@
 import { AbstractControl, AsyncValidatorFn } from "@angular/forms";
 import { map, Observable, of, switchMap, tap, timer } from "rxjs";
-import { ClubService } from "@/features/dashboard/services/club.service";
+import { ClubService } from "@/features/club/services/club.service";
 
 export const clubNameExistsValidator = (
   clubService: ClubService

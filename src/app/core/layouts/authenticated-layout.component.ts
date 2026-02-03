@@ -1,16 +1,16 @@
-import { ZardButtonComponent } from "@/shared/components/button/button.component";
-import { ZardIconComponent } from "@/shared/components/icon/icon.component";
-import { ZardIcon } from "@/shared/components/icon/icons";
-import { ContentComponent } from "@/shared/components/layout/content.component";
-import { LayoutComponent } from "@/shared/components/layout/layout.component";
-import { SidebarComponent, SidebarGroupComponent, SidebarGroupLabelComponent } from "@/shared/components/layout/sidebar.component";
-import { ZardTooltipDirective } from "@/shared/components/tooltip/tooltip";
+import { ZardButtonComponent } from "@/shared/components/zard/button/button.component";
+import { ZardIconComponent } from "@/shared/components/zard/icon/icon.component";
+import { ZardIcon } from "@/shared/components/zard/icon/icons";
+import { ContentComponent } from "@/shared/components/zard/layout/content.component";
+import { LayoutComponent } from "@/shared/components/zard/layout/layout.component";
+import { SidebarComponent, SidebarGroupComponent, SidebarGroupLabelComponent } from "@/shared/components/zard/layout/sidebar.component";
+import { ZardTooltipDirective } from "@/shared/components/zard/tooltip/tooltip";
 import { SIDEBAR } from "@/shared/constants/layout.constant";
 import { ResponsiveService } from "@/shared/services/responsive.service";
 import { Component, computed, inject, linkedSignal } from "@angular/core";
 import { RouterLink, RouterOutlet } from "@angular/router";
 import { TranslatePipe } from "@ngx-translate/core";
-import { HORIZONTAL_PADDING_COMPENSATION } from './../../shared/constants/layout.constant';
+import { HORIZONTAL_PADDING_COMPENSATION } from '@/shared/constants/layout.constant';
 
 @Component({
   selector: 'app-authenticated-layout',
@@ -42,9 +42,7 @@ import { HORIZONTAL_PADDING_COMPENSATION } from './../../shared/constants/layout
   <nav [class]="'flex h-full flex-col overflow-hidden ' + (sidebarCollapsed() ? 'gap-1 p-1 pt-4' : 'gap-4 p-4') ">
     <z-sidebar-group>
       @if (!sidebarCollapsed()) {
-        <z-sidebar-group-label>
-          NG CLUB MANAGER
-        </z-sidebar-group-label>
+        <z-sidebar-group-label>NG CLUB MANAGER</z-sidebar-group-label>
       }
     </z-sidebar-group>
     @for (item of menuItems; track item.label) {
@@ -105,7 +103,7 @@ export default class AuthenticatedLayoutComponent {
       },
       {
         icon: 'credit-card',
-        label: 'TRANSFERT_MARKET',
+        label: 'TRANSFER_MARKET',
         link: 'market'
       }
     ]

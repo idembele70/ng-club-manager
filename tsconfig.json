@@ -16,9 +16,8 @@
     "module": "preserve",
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "src/app/*"
-      ]
+      "@/*": ["src/app/*",],
+      "@libs/domain/*": ["libs/domain/*"]
     }
   },
   "angularCompilerOptions": {
@@ -34,6 +33,6 @@
     },
     {
       "path": "./tsconfig.spec.json"
-    }
+    },
   ]
 }

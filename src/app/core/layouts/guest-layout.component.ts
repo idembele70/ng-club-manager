@@ -10,8 +10,4 @@ import { RouterOutlet } from "@angular/router";
   <router-outlet />
   `
 })
-export default class GuestLayoutComponent {
-
-  constructor() {
-  }
-}
+export default class GuestLayoutComponent {}

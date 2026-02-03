@@ -1,14 +1,17 @@
-import { authRepositoryInterceptor } from './../auth.interceptor';
+import { authRepositoryInterceptor } from './../interceptors/auth.interceptor';
 import { JwtService } from '@/core/services/jwt.service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { provideTranslateService } from '@ngx-translate/core';
 import { firstValueFrom } from 'rxjs';
 import { Mock } from 'vitest';
-import { ClubRepositoryService } from '../../../features/dashboard/repositories/club.repository';
-import { tokenInterceptor } from '../../interceptors/token.interceptor';
-import { clubRepositoryInterceptor } from '../../../features/dashboard/interceptors/club-repository.interceptor';
-import { AuthSession, RegisterPayload, LoginPayload } from '../auth.model';
+import { ClubRepositoryService } from '@/features/club/repositories/club.repository';
+import { tokenInterceptor } from '@/core/interceptors/token.interceptor';
+import { clubRepositoryInterceptor } from '@/features/club/interceptors/club-repository.interceptor';
+import { AuthSession } from '../auth.model';
+import { RegisterPayload } from '@libs/domain/models/register-payload.model';
+import { LoginPayload } from '@libs/domain/models/login-payload.model';
+
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
@@ -28,7 +31,8 @@ describe('AuthService', () => {
       createdAt: 1704587,
       managerId: '002',
       name: 'FC Porto',
-      passwordEncrypted: 'Encrypted-P@ssw0rd?!'
+      passwordEncrypted: 'Encrypted-P@ssw0rd?!',
+      abbreviation: 'POR'
     },
     token: 'my-token'
   };

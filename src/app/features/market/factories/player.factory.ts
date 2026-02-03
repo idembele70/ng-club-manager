@@ -1,4 +1,4 @@
-import { Player, PlayerRole, Stats } from '../models/player.model';
+import { Player, PlayerRole, Stats } from '@libs/domain/models/player.model';
 import * as uuid from 'uuid';
 
 const firstNames = [
@@ -62,7 +62,7 @@ function statsByRole(role: PlayerRole): Stats {
   }
 }
 
-export function createPlayer(): Player {
+export function createRandomPlayer(): Player {
   const role = pick(roles);
   const age = rand(17, 34);
 
@@ -85,3 +85,8 @@ export function createPlayer(): Player {
     clubId: '',
   };
 }
+
+export const createPlayer = (overrides?: Partial<Player>): Player => ({
+  ...createRandomPlayer(),
+  ...overrides,
+});

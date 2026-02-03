@@ -37,13 +37,13 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadComponent: () => import('@/features/dashboard/pages/dashboard/dashboard.component')
+        loadComponent: () => import('@/features/club/pages/dashboard/dashboard.component')
           .then(m => m.DashboardComponent),
         canActivate: [authGuard],
       },
       {
         path: 'market',
-        loadComponent: () => import('@/features/market/pages/market/market.component')
+        loadComponent: () => import('@/features/market/pages/market.component')
           .then(m => m.MarketComponent)
       }
     ],

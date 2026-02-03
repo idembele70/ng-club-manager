@@ -1,10 +1,12 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { HttpUtilities } from '../../utilities/http.utilities';
-import { LoginPayload, RegisterPayload } from '../auth.model';
+import { HttpUtilities } from '@/core/utilities/http.utilities';
+import { LoginPayload } from '@libs/domain/models/login-payload.model';
+import { RegisterPayload } from '@libs/domain/models/register-payload.model';
 import { AuthRepositoryService } from '../auth.repository';
 
 export const authRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
+  console.log(req.url)
   if (!req.url.startsWith('/auth')) {
     return next(req);
   }
