@@ -4,9 +4,9 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { firstValueFrom } from 'rxjs';
 
 import { createClub } from '@/features/club/factories/club.factory';
-import { Club } from '@libs/domain/models/club.model';
+import { Club } from '@/features/club/models/club.model';
 import { createPlayer } from '../factories/player.factory';
-import { Player } from '@/shared/models/player.model';
+import { Player } from '@libs/domain/models/player.model';
 import { MarketService } from './market.service';
 
 describe('MarketService', () => {

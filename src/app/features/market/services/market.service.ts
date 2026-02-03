@@ -20,3 +20,4 @@ export class MarketService {
     return this.http.post<BuyPlayerResponse>(`/markets/players/${playerId}/buy`, null);
   }
 }
+  
