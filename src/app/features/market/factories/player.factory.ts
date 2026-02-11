@@ -1,3 +1,4 @@
+import { NATIONALITY_LIST } from '@/shared/constants/nationality.constant';
 import { Player, PlayerRole, Stats } from '@libs/domain/models/player.model';
 import * as uuid from 'uuid';
 
@@ -9,11 +10,6 @@ const firstNames = [
 const lastNames = [
   'Dembélé', 'Martin', 'Bernard', 'Traoré', 'Diallo', 'Benali', 'Moreau', 'Petit', 'Rossi',
   'Lopez', 'Garcia', 'Mbaye', 'Diop', 'Durand', 'Dubois', 'Nguyen', 'Koulibaly', 'Bamba'
-];
-
-const nationalities = [
-  'France', 'Spain', 'Brazil', 'Argentina', 'Senegal', 'Morocco', 'Portugal',
-  'Germany', 'Italy', 'Netherlands', 'England', 'Belgium', 'Ivory Coast'
 ];
 
 const roles: PlayerRole[] = ['GK', 'DEF', 'MID', 'ATT'];
@@ -76,7 +72,7 @@ export function createRandomPlayer(): Player {
     id: uuid.v1(),
     fullName: `${pick(firstNames)} ${pick(lastNames)}`,
     age,
-    nationality: pick(nationalities),
+    nationality: pick(NATIONALITY_LIST).name,
     role,
     rating,
     avatarUrl: '',

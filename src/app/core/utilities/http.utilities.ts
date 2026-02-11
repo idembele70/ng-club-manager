@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import { HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
 import { Observable, of, throwError } from "rxjs";
 
 export class HttpUtilities {
@@ -54,5 +54,16 @@ export class HttpUtilities {
       url,
       body,
     }));
+  }
+
+  static HttpParamsToObject(params: HttpParams): Record<string, string> {
+    return params.keys().reduce<Record<string, string>>(
+      (acc, key) => {
+        const value = params.get(key);
+        if (value !== null) acc[key] = value;
+        return acc;
+      },
+      {}
+    );
   }
 }

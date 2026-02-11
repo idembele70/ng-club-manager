@@ -5,6 +5,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { MarketRepository } from '../repositories/market.repository';
 import { PlayerRepository } from '@/shared/repositories/player.repository';
+import { MarketFilter } from '../models/market-filter.model';
 
 export const marketRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.startsWith('/markets')) {
@@ -21,7 +22,9 @@ export const marketRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
     return HttpUtilities.unauthorizedError(req.url, 'ERRORS.HTTP.401.MESSAGE')
   }
   if (req.url.endsWith('/players')) {
-    return HttpUtilities.getReqSuccessResponse(req.url, marketRepository.getPlayersForSale(req.params));
+    const params = HttpUtilities.HttpParamsToObject(req.params);
+
+    return HttpUtilities.getReqSuccessResponse(req.url, marketRepository.getPlayersForSale(params as MarketFilter));
   }
   if (/players\/[a-zA-Z0-9-]+\/buy$/.test(req.url)) {
     const decode = authRepository.decodeToken(token ?? '');

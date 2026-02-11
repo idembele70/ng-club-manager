@@ -6,6 +6,7 @@ import { authRepositoryInterceptor } from "../auth/interceptors/auth.interceptor
 import { errorInterceptor } from "../interceptors/error.interceptor";
 import { tokenInterceptor } from "../interceptors/token.interceptor";
 import { playerRepositoryInterceptor } from "@/shared/interceptors/player-repository.interceptor";
+import { nationalityRepositoryInterceptor } from "@/shared/interceptors/nationality-repository.interceptor";
 
 export const provideCoreHttp = () =>
   provideHttpClient(
@@ -23,4 +24,5 @@ const mockInterceptors: HttpInterceptorFn[] = [
   managerRepositoryInterceptor,
   marketRepositoryInterceptor,
   playerRepositoryInterceptor,
+  nationalityRepositoryInterceptor,
 ];

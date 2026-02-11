@@ -25,3 +25,9 @@ export interface Stats {
   defending: number;
   physical: number;
 }
+
+export interface PlayerFilter {
+  role?: PlayerRole;
+  minRating?: number;
+  maxRating?: number;
+}
