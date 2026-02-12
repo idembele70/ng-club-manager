@@ -36,6 +36,7 @@ import { map, tap } from 'rxjs';
           <button
             z-button zType="outline"
             routerLink="/market"
+            [attr.data-testid]="'purchase-' + role"
             [queryParams]="{ role }">{{ ('CLUB.DASHBOARD.EMPTY.CTA.OPEN_MARKET.FILTERS.' + role) | translate }}</button>
         }
         </div>

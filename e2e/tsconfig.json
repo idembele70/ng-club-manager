@@ -8,7 +8,7 @@
     "baseUrl": "./",
     "types": ["node", "@playwright/test"],
     "paths": {
-      "@auth/*": ["auth/*"],
+      "@auth/*": ["features/auth/*"],
       "@config/*": ["config/*"],
       "@libs/domain/*": ["../libs/domain/*"],
       "@shared/*": ["shared/*"],

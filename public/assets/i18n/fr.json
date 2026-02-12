@@ -179,6 +179,9 @@
         "SEARCH_PLACEHOLDER": "Rechercher un poste",
         "EMPTY_TEXT": "Aucun poste n'a été trouvé"
       },
+      "RATE": {
+        "LABEL": "Note"
+      },
       "NATIONALITY": {
         "PLACEHOLDER": "Nationalité",
         "SEARCH_PLACEHOLDER": "Rechercher une nationalité",

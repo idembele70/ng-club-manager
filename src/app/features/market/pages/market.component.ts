@@ -54,6 +54,7 @@ export class MarketComponent implements OnInit {
   protected readonly sidebarCurrentWidth = this.responsiveService.sidebarCurrentWidth;
 
   ngOnInit(): void {
+    this.marketService.resetPlayerList();
     this.updateFilterAndReload();
   }
 

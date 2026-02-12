@@ -4,7 +4,7 @@ import { Nationality } from '@/shared/models/nationality.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Player } from '@libs/domain/models/player.model';
-import { delay, map, Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { BuyPlayerResponse } from '../models/buy-player-response.model';
 import { MarketPlayersResponse } from '../models/market-players-response.model';
 import { MarketFilter } from './../models/market-filter.model';
@@ -36,6 +36,7 @@ export class MarketService {
       if (value)
         params = params.set(key, value);
     });
+
     return this.http.get<MarketPlayersResponse>('/markets/players', { params }).pipe(
       tap({
         next: ({ players, playersCount, rating }) => {
@@ -53,7 +54,7 @@ export class MarketService {
     return this.http.get<Nationality[]>('/nationalities').pipe(
       map(nationalities => 
         nationalities.map(nationality => ({ value: nationality.name, label: nationality.name })
-      ))
+      )),
     );
   }
 

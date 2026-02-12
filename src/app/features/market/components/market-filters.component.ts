@@ -31,10 +31,10 @@ import { PlayerRole } from '@libs/domain/models/player.model';
         [emptyText]="'MARKET.FILTERS.ROLE.EMPTY_TEXT' | translate"
         formControlName="role"
       />
-      <div class="w-[150px] flex items-center justify-center px-5">
-        <h6 class="mr-3">{{ currentMinRating() ?? 0 }}</h6>
+      <div class="w-[150px] flex flex-col items-center justify-center px-5 gap-1">
+        <h6 data-testid="rate-filter-label" class="mr-3">{{ 'MARKET.FILTERS.RATE.LABEL' | translate }}: {{ currentMinRating() ?? 0 }}</h6>
         <z-slider
-          zStep="4"
+          zStep="1"
           [zMin]="marketService.filters()?.minRating ?? 50"
           [zMax]="marketService.filters()?.maxRating ?? 60"
           formControlName="minRating" />
