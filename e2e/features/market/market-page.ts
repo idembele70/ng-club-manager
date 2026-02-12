@@ -1,11 +1,10 @@
-import { expect, Locator, Page } from "@playwright/test";
-import { buildAppFrontUrl, FRONT_URLS_REGEX } from "@shared/utilities/url-front-utility";
 import { Player, PlayerRole } from '@libs/domain/models/player.model';
+import { expect, Locator, Page } from "@playwright/test";
 import { ZardDialogComponent } from "@shared/components/zard-dialog-component";
 import { customExpect } from "@shared/fixtures/custom-expect-fixture";
 import { StringUtility } from "@shared/utilities/string-utility";
+import { buildAppFrontUrl, FRONT_URLS_REGEX } from "@shared/utilities/url-front-utility";
 import { MarketFilter } from "./market-filter.model";
-import { ENV_CONFIG, ENV } from "@config/env.config";
 
 export class MarketPage {
   private readonly urlRegex = FRONT_URLS_REGEX.MARKET;
@@ -129,13 +128,13 @@ export class MarketPage {
     }
     if (filter.rate) {
       while (true) {
-        if (await this.getFiltersRateValue() === filter.rate)
+        if (await this.getFiltersRateValue() >= filter.rate)
           break;
         await this.rateSlider.press('ArrowRight');
       }
     }
     if (filter.nationality) {
-      this.nationalityDropdown.click();
+      await this.nationalityDropdown.click();
       await this.dropDownOption.filter({ hasText: filter.nationality }).click();
     }
     await this.searchButton.click();
@@ -152,15 +151,15 @@ export class MarketPage {
     }
     if (filter.rate) {
       for (let i = 0; i < playerCount; i++) {
-        await customExpect(this.players.nth(i)).toHaveMinimumRate(filter.rate)
+        await customExpect(this.players.nth(i)).toHaveMinimumRate(filter.rate);
       }
-      if (filter.nationality) {
-        await expect(
-          this.players
-            .getByTestId('nationality')
-            .filter({ hasText: new RegExp(`^${filter.nationality}$`) })
-        ).toHaveCount(playerCount);
-      }
+    }
+    if (filter.nationality) {
+      await expect(
+        this.players
+          .getByTestId('nationality')
+          .filter({ hasText: new RegExp(`^${filter.nationality}$`) })
+      ).toHaveCount(playerCount);
     }
   }
 }

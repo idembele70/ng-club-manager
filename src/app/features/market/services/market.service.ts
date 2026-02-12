@@ -43,7 +43,7 @@ export class MarketService {
           this._playersForSale.update(p => [...p, ...players]);
           this.setCanLoadMore(this.playersForSale().length < playersCount);
           this.setLoading(LoadingState.LOADED);
-          this.updateFilters({...this._filters(), minRating: rating.min, maxRating: rating.max });
+          this.updateFilters({ ...this._filters(), minRating: rating.min, maxRating: rating.max });
         },
         error: () => this.setLoading(LoadingState.ERROR),
       })
@@ -52,9 +52,9 @@ export class MarketService {
 
   getNationalities(): Observable<ZardComboboxOption[]> {
     return this.http.get<Nationality[]>('/nationalities').pipe(
-      map(nationalities => 
-        nationalities.map(nationality => ({ value: nationality.name, label: nationality.name })
-      )),
+      map(nationalities =>
+        nationalities.map(nationality => ({ value: nationality.name, label: nationality.name }))
+      ),
     );
   }
 

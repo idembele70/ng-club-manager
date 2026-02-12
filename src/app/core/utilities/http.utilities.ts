@@ -56,7 +56,7 @@ export class HttpUtilities {
     }));
   }
 
-  static HttpParamsToObject(params: HttpParams): Record<string, string> {
+  static httpParamsToObject(params: HttpParams): Record<string, string> {
     return params.keys().reduce<Record<string, string>>(
       (acc, key) => {
         const value = params.get(key);

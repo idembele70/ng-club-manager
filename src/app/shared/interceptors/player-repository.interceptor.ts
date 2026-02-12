@@ -18,7 +18,7 @@ export const playerRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   if (req.method === 'GET') {
-    const params = HttpUtilities.HttpParamsToObject(req.params);
+    const params = HttpUtilities.httpParamsToObject(req.params);
     const players = playerRepository.find(params)
     return HttpUtilities.getReqSuccessResponse(req.url, { players: players, playersCount: players.length });
   }

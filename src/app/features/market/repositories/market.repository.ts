@@ -1,14 +1,13 @@
 import { StorageService } from "@/core/services/storage.service";
 import { ClubRepositoryService } from '@/features/club/repositories/club.repository';
 import { PlayerRepository } from '@/shared/repositories/player.repository';
-import { HttpParams } from "@angular/common/http";
+import { matchesMarketPlayerFilter } from "@/shared/utils/filter.utils";
 import { effect, inject, Injectable, signal } from "@angular/core";
-import { BuyPlayerResponse } from "../models/buy-player-response.model";
-import { MarketTransaction } from '../models/market-transaction.model';
 import { Player } from "@libs/domain/models/player.model";
+import { BuyPlayerResponse } from "../models/buy-player-response.model";
 import { MarketFilter } from "../models/market-filter.model";
-import { matchesFilter, matchesMarketPlayerFilter } from "@/shared/utils/filter.utils";
 import { MarketPlayersResponse } from "../models/market-players-response.model";
+import { MarketTransaction } from '../models/market-transaction.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +40,7 @@ export class MarketRepository {
     const ratings = this._marketList().map(p => p.rating);
     return {
       players,
-      playersCount: this._marketList().length,
+      playersCount: filteredPlayers.length,
       rating: {
         min: Math.min(...ratings),
         max: Math.max(...ratings),

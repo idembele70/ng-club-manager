@@ -2,15 +2,14 @@ import { ZardButtonComponent } from '@/shared/components/zard/button';
 import { ZardComboboxComponent, ZardComboboxOption } from '@/shared/components/zard/combobox';
 import { ZardSliderComponent } from '@/shared/components/zard/slider';
 import { PLAYER_ROLE_LIST } from '@/shared/constants/player-roles.constant';
-import { Component, computed, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
-import { MarketFilter } from '../models/market-filter.model';
-import { MarketService } from '../services/market.service';
-import { filter, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerRole } from '@libs/domain/models/player.model';
+import { TranslatePipe } from '@ngx-translate/core';
+import { finalize, tap } from 'rxjs';
+import { MarketService } from '../services/market.service';
 
 @Component({
   selector: 'app-market-filters',
@@ -89,7 +88,9 @@ export class MarketFiltersComponent implements OnInit {
     this.marketService.setIsSearching(true)
     this.marketService.resetPlayerList();
     this.marketService.updateFilters({...this.filterForm.value, minRating: this.currentMinRating()});
-    this.marketService.getPlayersForSale().subscribe(() => this.marketService.setIsSearching(false));
+    this.marketService.getPlayersForSale()
+      .pipe(finalize(() => this.marketService.setIsSearching(false)))
+      .subscribe();
   }
 
   private listenToMinRatingChanges(): void {

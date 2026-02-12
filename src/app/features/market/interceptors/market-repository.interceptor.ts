@@ -22,7 +22,7 @@ export const marketRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
     return HttpUtilities.unauthorizedError(req.url, 'ERRORS.HTTP.401.MESSAGE')
   }
   if (req.url.endsWith('/players')) {
-    const params = HttpUtilities.HttpParamsToObject(req.params);
+    const params = HttpUtilities.httpParamsToObject(req.params);
 
     return HttpUtilities.getReqSuccessResponse(req.url, marketRepository.getPlayersForSale(params as MarketFilter));
   }

@@ -11,8 +11,8 @@ export const customExpect = expect.extend({
       pass,
       message: () =>
         pass
-          ? `Expected ${receivedValue} to be < ${expected}`
-          : `Expected ${receivedValue} to be >= ${expected}`,
+          ? `Expected ${receivedValue} to be >= ${expected}`
+          : `Expected ${receivedValue} to be < ${expected}`,
     };
   },
 });
