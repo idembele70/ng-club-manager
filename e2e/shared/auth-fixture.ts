@@ -1,9 +1,9 @@
 import { RegisterPayload } from '@libs/domain/models/register-payload.model';
 import { test as baseTest } from '@playwright/test';
-import { AuthFactory } from '@auth/auth-factory';
+import { AuthFactory } from 'features/auth/auth-factory';
 import fs from 'node:fs';
 import path from 'node:path';
-import { AuthUtilities } from './utilities/auth.utilities';
+import { AuthUtilities } from './utilities/auth-utility';
 
 export const expect = baseTest.expect;
 

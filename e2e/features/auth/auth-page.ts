@@ -3,7 +3,7 @@ import { LoginPayload } from "@libs/domain/models/login-payload.model";
 import { RegisterPayload } from "@libs/domain/models/register-payload.model";
 import { Locator, Page, expect } from "@playwright/test";
 import { SidebarComponent } from "@shared/components/sidebar-component";
-import { buildAppFrontUrl, FRONT_URLS_REGEX } from "@shared/utilities/url-front.utility";
+import { buildAppFrontUrl, FRONT_URLS_REGEX } from "@shared/utilities/url-front-utility";
 
 export class AuthPage {
 

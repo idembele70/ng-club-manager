@@ -18,7 +18,7 @@ import { TranslatePipe } from '@ngx-translate/core';
      <ng-template #title>
     <div class="flex justify-between">
       <div>
-        <span class="mr-2" data-testid="nationality">{{ player().nationality + ' '  }}</span>
+        <span class="mr-2" data-testid="nationality">{{ player().nationality}}</span>
         <span data-testid="role">{{ player().role }}</span>
       </div>
       <span data-testid="rating">{{ 'PLAYER_CARD.RATE' | translate }}: {{ player().rating }} </span>

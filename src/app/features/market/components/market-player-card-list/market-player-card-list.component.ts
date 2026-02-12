@@ -28,7 +28,9 @@ import { MarketService } from '@/features/market/services/market.service';
             <button (click)="buyPlayer(player)" z-button zType="outline" type="button">Acheter</button>
           </app-player-card>
         } @empty {
+         @if (!marketService.isLoading() && !marketService.isSearching()) {
           <h3>{{ 'MARKET.EMPTY' | translate}}</h3>
+         }
         }
       </div>
   `,
@@ -36,7 +38,7 @@ import { MarketService } from '@/features/market/services/market.service';
 })
 export class MarketPlayerCardListComponent {
   playersForSale = input.required<Player[]>();
-  private readonly marketService = inject(MarketService);
+  protected readonly marketService = inject(MarketService);
   private readonly dialogService = inject(ZardDialogService);
   private readonly millionsPipe = inject(MillionsPipe);
   private readonly authService = inject(AuthService);

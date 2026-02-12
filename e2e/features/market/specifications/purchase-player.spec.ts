@@ -1,7 +1,7 @@
 import { authTest } from '@shared/auth-fixture';
-import { MarketPage } from './market-page';
+import { MarketPage } from '../market-page';
 
-authTest.describe('market', () => {
+authTest.describe('Market Players - Purchase', () => {
   authTest.beforeEach( async({ page }) => {
     const marketPage = new MarketPage(page);
     await marketPage.goto();

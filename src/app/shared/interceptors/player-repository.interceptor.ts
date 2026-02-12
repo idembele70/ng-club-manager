@@ -18,18 +18,10 @@ export const playerRepositoryInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   if (req.method === 'GET') {
-    const params = req.params.keys().reduce<Record<string, string>>(
-      (acc, key) => {
-        const value = req.params.get(key);
-        if (value !== null) acc[key] = value;
-        return acc;
-      },
-      {}
-    );
+    const params = HttpUtilities.httpParamsToObject(req.params);
     const players = playerRepository.find(params)
-    return HttpUtilities.getReqSuccessResponse(req.url, {players: players, playersCount: players.length});
+    return HttpUtilities.getReqSuccessResponse(req.url, { players: players, playersCount: players.length });
   }
 
   return HttpUtilities.notFoundError(req.url);
-
 };

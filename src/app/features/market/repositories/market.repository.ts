@@ -1,11 +1,13 @@
 import { StorageService } from "@/core/services/storage.service";
 import { ClubRepositoryService } from '@/features/club/repositories/club.repository';
 import { PlayerRepository } from '@/shared/repositories/player.repository';
-import { HttpParams } from "@angular/common/http";
+import { matchesMarketPlayerFilter } from "@/shared/utils/filter.utils";
 import { effect, inject, Injectable, signal } from "@angular/core";
-import { BuyPlayerResponse } from "../models/buy-player-response.model";
-import { MarketTransaction } from '../models/market-transaction.model';
 import { Player } from "@libs/domain/models/player.model";
+import { BuyPlayerResponse } from "../models/buy-player-response.model";
+import { MarketFilter } from "../models/market-filter.model";
+import { MarketPlayersResponse } from "../models/market-players-response.model";
+import { MarketTransaction } from '../models/market-transaction.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,21 +28,34 @@ export class MarketRepository {
     });
   }
 
-    getPlayersForSale(httpParams: HttpParams): { players: Player[], playersCount: number } {
-      const startIndex = +(httpParams.get('offset') ?? 0);
-      const endIndex = startIndex + +(httpParams.get('limit') ?? 50);
-      const players = [...this._marketList()].slice(startIndex, endIndex);
-      return { players, playersCount: this._marketList().length };
-    }
+  getPlayersForSale(
+    filter: MarketFilter
+  ): MarketPlayersResponse {
+    const { offset, limit, ...playerFieldFilters } = filter;
+    const startIndex = +(offset ?? 0);
+    const endIndex = startIndex + +(limit ?? 50);
 
-    buyPlayer(player: Player, clubId: string): BuyPlayerResponse {
-      const club = this.clubRepository.findById(clubId)!;
-      this.clubRepository.update({ ...club, balance: (club.balance - player.price) })
-      this.playerRepository.update({clubId });
-      return {
-        clubName: club.name,
-        playerFullName: player.fullName,
-        price: player.price,
-      };
-    }
+    const filteredPlayers = this._marketList().filter(player => matchesMarketPlayerFilter(player, playerFieldFilters))
+    const players = [...filteredPlayers].slice(startIndex, endIndex);
+    const ratings = this._marketList().map(p => p.rating);
+    return {
+      players,
+      playersCount: filteredPlayers.length,
+      rating: {
+        min: Math.min(...ratings),
+        max: Math.max(...ratings),
+      }
+    };
   }
+
+  buyPlayer(player: Player, clubId: string): BuyPlayerResponse {
+    const club = this.clubRepository.findById(clubId)!;
+    this.clubRepository.update({ ...club, balance: (club.balance - player.price) })
+    this.playerRepository.update({ clubId });
+    return {
+      clubName: club.name,
+      playerFullName: player.fullName,
+      price: player.price,
+    };
+  }
+}

@@ -2,6 +2,7 @@ import { StorageService } from '@/core/services/storage.service';
 import { Player } from '@libs/domain/models/player.model';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { createRandomPlayer } from '@/features/market/factories/player.factory';
+import { matchesFilter } from '../utils/filter.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -33,10 +34,7 @@ export class PlayerRepository {
   find<T extends readonly (keyof Player)[]>(
     filter: { [P in T[number]]?: Player[P] }
   ): Player[] {
-    return this._playerList().filter(player =>
-      (Object.entries(filter) as [keyof Player, Player[keyof Player]][])
-        .every(([key, value]) => player[key] === value)
-    );
+    return this._playerList().filter(player => matchesFilter(player, filter));
   }
 
   update(player: Partial<Player>): void {
